@@ -115,6 +115,7 @@ class Device(PyaoscxFactory, metaclass=Singleton):
             "interfaces",
             "fans",
             "resource_utilization",
+            "temp_sensors"
         ]
 
         # Format attribute list by joining every element with a comma
