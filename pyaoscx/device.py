@@ -43,6 +43,9 @@ class Device(PyaoscxFactory, metaclass=Singleton):
             create_attrs().
         """
         logging.info("Retrieving the switch attributes and capabilities")
+        
+        if (hasattr(self, "original_attributes")):
+            return
 
         non_configurable_attrs = [
             "admin_password_set",
@@ -107,12 +110,14 @@ class Device(PyaoscxFactory, metaclass=Singleton):
         logging.info(
             "Retrieving the switch subsystem attributes and capabilities"
         )
+        
+        if (hasattr(self, "subsystems")):
+            return
 
         # Attribute list
         attributes = [
             "product_info",
             "power_supplies",
-            "interfaces",
             "fans",
             "resource_utilization",
             "temp_sensors"
@@ -125,7 +130,7 @@ class Device(PyaoscxFactory, metaclass=Singleton):
         uri = "system/subsystems?attributes={0}&depth={1}".format(
             attributes_list, self.session.api.default_subsystem_facts_depth
         )
-
+        
         try:
             # Try to perform a GET call and retrieve the data
             response = self.session.request("GET", uri)
