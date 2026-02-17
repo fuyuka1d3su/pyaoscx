@@ -53,6 +53,7 @@ class Device(PyaoscxFactory, metaclass=Singleton):
             "boot_time",
             "capabilities",
             "capacities",
+            "hostname",
             "mgmt_intf_status",
             "platform_name",
             "software_images",
